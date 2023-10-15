@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "pygameflow"
+version = "0.0.0"
+description = "PyGameFlow: Object Oriented, Modern and Developer-friendly wrapper for Pygame"
+authors = ["Ificiana <ificiana@gmail.com>"]
+readme = "README.md"
+classifiers = [
+    "Development Status :: 1 - Planning"
+]
+packages = [
+    { include = "pygameflow", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pygame = "^2.5.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+isort = "^5.12.0"
+pylint = "^3.0.1"
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
