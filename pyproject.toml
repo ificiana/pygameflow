@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pygameflow"
-version = "0.0.0"
+version = "0.0.0a1"
 description = "PyGameFlow: Object Oriented, Modern and Developer-friendly wrapper for Pygame"
 authors = ["Ificiana <ificiana@gmail.com>"]
 homepage = "https://github.com/ificiana/pygameflow"
