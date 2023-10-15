@@ -3,7 +3,11 @@ name = "pygameflow"
 version = "0.0.0"
 description = "PyGameFlow: Object Oriented, Modern and Developer-friendly wrapper for Pygame"
 authors = ["Ificiana <ificiana@gmail.com>"]
+homepage = "https://github.com/ificiana/pygameflow"
+repository = "https://github.com/ificiana/pygameflow"
+documentation = "https://github.com/ificiana/pygameflow"
 readme = "README.md"
+license = "AGPL-3.0-or-later"
 classifiers = [
     "Development Status :: 1 - Planning"
 ]
