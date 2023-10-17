@@ -44,7 +44,7 @@ class MyGame2(pgf.View):
 
 def main():
     """Main function"""
-    window = pgf.window.open_window(
+    window = pgf.open_window(
         width=SCREEN_WIDTH,
         height=SCREEN_HEIGHT,
         resizable=True,
