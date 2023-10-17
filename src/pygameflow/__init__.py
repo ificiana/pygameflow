@@ -34,6 +34,8 @@ from .window_commands import get_window
 from .window_commands import set_window
 from .window_commands import close_window
 
+from .window_commands import get_title
+from .window_commands import set_title
 from .window_commands import run
 from .window_commands import set_background_color
 from .window_commands import exit  # pylint: disable=redefined-builtin
