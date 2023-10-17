@@ -146,18 +146,23 @@ class Window:  # pylint: disable=too-many-instance-attributes
         self.__register_events()
 
     def __register_events(self):
-        self.event_manager.add_event_handler(pygame.QUIT, self.close)
-        self.event_manager.add_event_handler(pygame.WINDOWFOCUSGAINED, self.on_focus)
-        self.event_manager.add_event_handler(pygame.WINDOWFOCUSLOST, self.on_blur)
-        self.event_manager.add_event_handler(pygame.KEYDOWN, self.on_key_press)
-        self.event_manager.add_event_handler(pygame.KEYUP, self.on_key_release)
-        self.event_manager.add_event_handler(pygame.WINDOWLEAVE, self.on_mouse_leave)
-        self.event_manager.add_event_handler(pygame.WINDOWENTER, self.on_mouse_enter)
-        self.event_manager.add_event_handler(pygame.MOUSEMOTION, self.__on_mouse_motion)
-        self.event_manager.add_event_handler(pygame.MOUSEBUTTONDOWN, self.on_mouse_press)
-        self.event_manager.add_event_handler(pygame.MOUSEBUTTONUP, self.on_mouse_release)
-        self.event_manager.add_event_handler(pygame.MOUSEWHEEL, self.on_mouse_scroll)
-        self.event_manager.add_event_handler(pygame.WINDOWRESIZED, self.on_resize)
+        event_mapping = {
+            pygame.QUIT: self.close,
+            pygame.WINDOWFOCUSGAINED: self.on_focus,
+            pygame.WINDOWFOCUSLOST: self.on_blur,
+            pygame.KEYDOWN: self.on_key_press,
+            pygame.KEYUP: self.on_key_release,
+            pygame.WINDOWLEAVE: self.on_mouse_leave,
+            pygame.WINDOWENTER: self.on_mouse_enter,
+            pygame.MOUSEMOTION: self.__on_mouse_motion,
+            pygame.MOUSEBUTTONDOWN: self.on_mouse_press,
+            pygame.MOUSEBUTTONUP: self.on_mouse_release,
+            pygame.MOUSEWHEEL: self.on_mouse_scroll,
+            pygame.WINDOWRESIZED: self.on_resize,
+        }
+
+        for event_type, handler in event_mapping.items():
+            self.event_manager.add_event_handler(event_type, handler)
 
     def clear(self, color: Optional[pygame.Color] = None):
         """

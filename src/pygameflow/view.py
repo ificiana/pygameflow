@@ -28,18 +28,22 @@ class View:  # pylint: disable=too-many-instance-attributes
         self.__register_callers()
 
     def __register_callers(self):
-        # register callers
-        self.window.on_draw = self.on_draw
-        self.window.on_update = self.on_update
-        self.window.on_key_press = self.on_key_press
-        self.window.on_key_release = self.on_key_release
-        self.window.on_mouse_leave = self.on_mouse_leave
-        self.window.on_mouse_enter = self.on_mouse_enter
-        self.window.on_mouse_press = self.on_mouse_press
-        self.window.on_mouse_release = self.on_mouse_release
-        self.window.on_mouse_scroll = self.on_mouse_scroll
+        method_names = [
+            "on_draw",
+            "on_update",
+            "on_key_press",
+            "on_key_release",
+            "on_mouse_leave",
+            "on_mouse_enter",
+            "on_mouse_press",
+            "on_mouse_release",
+            "on_mouse_scroll",
+        ]
 
-        # re-register
+        for method_name in method_names:
+            setattr(self.window, method_name, getattr(self, method_name))
+
+        # re-register events
         # noinspection PyProtectedMember, PyUnresolvedReferences
         self.window._Window__register_events()  # pylint: disable=protected-access
 

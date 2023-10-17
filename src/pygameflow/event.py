@@ -114,25 +114,24 @@ class EventManager:
         Handle events by calling the appropriate event handlers for the events in the
         pygame event queue.
         """
-        for _event in pygame.event.get():
-            if handlers := self.event_handlers.get(_event.type):
+        event_mapping = {
+            pygame.KEYUP: lambda e: (e.key, e.mod),
+            pygame.KEYDOWN: lambda e: (e.key, e.mod),
+            pygame.WINDOWENTER: lambda e: pygame.mouse.get_pos(),
+            pygame.WINDOWLEAVE: lambda e: pygame.mouse.get_pos(),
+            pygame.MOUSEMOTION: lambda e: (*e.pos, *e.rel, e.buttons, pygame.key.get_mods()),
+            pygame.MOUSEBUTTONUP: lambda e: (*e.pos, e.button, pygame.key.get_mods()),
+            pygame.MOUSEBUTTONDOWN: lambda e: (*e.pos, e.button, pygame.key.get_mods()),
+            pygame.MOUSEWHEEL: lambda e: (*pygame.mouse.get_pos(), e.x, e.y),
+            pygame.WINDOWRESIZED: lambda e: (e.x, e.y),
+        }
+
+        for event in pygame.event.get():
+            if handlers := self.event_handlers.get(event.type):
                 for callback in handlers.values():
-                    if _event.type in [pygame.KEYUP, pygame.KEYDOWN]:
-                        callback(_event.key, _event.mod)
-                    elif _event.type in [pygame.WINDOWENTER, pygame.WINDOWLEAVE]:
-                        callback(*pygame.mouse.get_pos())
-                    elif _event.type == pygame.MOUSEMOTION:
-                        callback(*_event.pos, *_event.rel, _event.buttons, pygame.key.get_mods())
-                    elif _event.type in [pygame.MOUSEBUTTONUP, pygame.MOUSEBUTTONDOWN]:
-                        callback(*_event.pos, _event.button, pygame.key.get_mods())
-                    elif _event.type == pygame.MOUSEWHEEL:
-                        callback(*pygame.mouse.get_pos(), _event.x, _event.y)
-                    elif _event.type == pygame.WINDOWRESIZED:
-                        callback(_event.x, _event.y)
-                    else:
-                        callback(_event)
+                    callback(*event_mapping.get(event.type, lambda e: ())(event))
             # else:
-            #     print("unhandled event:", _event)
+            #     print("unhandled event:", event)
 
 
 EventType = Union[pygame.event.Event, UserEvent]
