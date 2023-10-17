@@ -467,7 +467,7 @@ class Window:  # pylint: disable=too-many-instance-attributes
 def open_window(
     width: int,
     height: int,
-    window_title: Optional[str] = None,
+    window_title: Optional[str] = "PyGameFlow Window",
     resizable: bool = False,
     antialiasing: bool = True,
 ) -> Window:
