@@ -129,7 +129,7 @@ class EventManager:
         for event in pygame.event.get():
             if handlers := self.event_handlers.get(event.type):
                 for callback in handlers.values():
-                    callback(*event_mapping.get(event.type, lambda e: ())(event))
+                    callback(*event_mapping.get(event.type, lambda e: (event,))(event))
             # else:
             #     print("unhandled event:", event)
 
